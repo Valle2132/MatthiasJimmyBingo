@@ -1,147 +1,22 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MatthiasJimmy Stream Bingo!</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 2rem auto;
-    text-align: center;
-    background-color: #121212;
-    color: #eee;
-  }
-  table {
-    border-collapse: collapse;
-    margin: auto;
-  }
-  td {
-    width: 100px;
-    height: 100px;
-    border: 1px solid #555;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-    background-color: #1e1e1e;
-    color: #eee;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  td.marked {
-    background-color: #4caf50;
-    color: #121212;
-    font-weight: bold;
-  }
-  button {
-    margin: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    background-color: #333;
-    color: #eee;
-    border: 1px solid #555;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background-color: #4caf50;
-    color: #121212;
-  }
-  h1 {
-    color: #fa2b2b;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MatthiasJimmy Stream Bingo!</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<h1>MatthiasJimmy Stream Bingo!</h1>
-<button id="newCardBtn">Neue Karte generieren</button>
+  <h1>MatthiasJimmy Stream Bingo!</h1>
+  <button id="newCardBtn">Neue Karte generieren</button>
+  <table id="bingoTable"></table>
 
-<table id="bingoTable"></table>
+  <div id="winOverlay">
+    <img src="win.jpg" alt="Gewonnen!" />
+  </div>
 
-<script>
-  const phrases = [
-    "redet über Kärnten", //"Phrase 1", 
-    "beschwert sich wegen Swap", //"Phrase 2", 
-    "wird getrashtalked", //"Phrase 3", 
-    "beschwert sich über PC", //"Phrase 4", 
-    "erzählt von Chaya", //"Phrase 5",
-    "beleidigt im Chat", //"Phrase 6", 
-    "/muteall", //"Phrase 7", 
-    "will lieber Valo spielen", //"Phrase 8", 
-    "\"RIOT\"", //"Phrase 9", 
-    "redet über AMS", //"Phrase 10",
-    "Ragequit", //"Phrase 11", 
-    "von Simon getrashtalked", //"Phrase 12", 
-    "schlägt auf Tisch", //"Phrase 13", 
-    "flamed Jungler", //"Phrase 14", 
-    "kaut Kaugummi", //"Phrase 15",
-    "schaut Marias Stream", //"Phrase 16", 
-    "useless Flash", //"Phrase 17", 
-    "baut falsch", //"Phrase 18", 
-    "falsche Runen", //"Phrase 19", 
-    "schreit Jimmy an", //"Phrase 20",
-    "schreit ins Mic", //"Phrase 21", 
-    "\"leck meine Eier\"", //"Phrase 22", 
-    "\"Enemy smurft!!!\"", //"Phrase 23", 
-    "beschwert sich über Rank", //"Phrase 24", 
-    "Surrender Vote", //"Phrase 25",
-    "Disconnect/Crash", //"Phrase 26",
-    "10/0 lose", //"Phrase 27",
-    "0/10 win", //"Phrase 28",
-    "benutzt ChatGPT", //"Phrase 29",
-    "ihm ist zu heiß", //"Phrase 30",
-    "falscher Streamtitle", //"Phrase 31",
-    "Gym-Stories", //"Phrase 32",
-    "macht on stream Insta-Story", //"Phrase 33",
-    "trinkt Energy Drink", //"Phrase 34",
-    "verliert pre 14 Tower", //"Phrase 35",
-    "wenigsten Schaden im Team",
-    "spielt Sett",
-    "\"Aids\"",
-    "spielt gegen Mordekaiser aus eigener Community",
-    "kommt zu spät",
-    "geht zu früh wegen Tiktok", // 41
-    "hat technische Probleme"
-  ];
-
-  const size = 5;
-  const table = document.getElementById("bingoTable");
-  const btn = document.getElementById("newCardBtn");
-
-  function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-    }
-    return array;
-  }
-
-  function createCard() {
-    table.innerHTML = "";
-    let shuffled = shuffle([...phrases]);
-    for (let r = 0; r < size; r++) {
-      let row = document.createElement("tr");
-      for (let c = 0; c < size; c++) {
-        let cell = document.createElement("td");
-        let phrase = shuffled[r * size + c];
-        cell.textContent = phrase;
-        cell.addEventListener("click", () => {
-          cell.classList.toggle("marked");
-        });
-        row.appendChild(cell);
-      }
-      table.appendChild(row);
-    }
-  }
-
-  btn.addEventListener("click", createCard);
-
-  createCard();
-</script>
-
+  <script src="phrases.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
